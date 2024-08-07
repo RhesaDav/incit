@@ -1,4 +1,4 @@
-# Project Name
+# Rhesa's App
 
 ## Overview
 
