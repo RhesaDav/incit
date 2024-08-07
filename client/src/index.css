@@ -1,0 +1,77 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+body {
+  @apply bg-base-50 text-secondary font-sans;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold text-primary;
+}
+
+a {
+  @apply text-accent hover:text-secondary transition-colors duration-200;
+}
+
+/* Custom styles for Input component */
+.input-container {
+  @apply mb-4;
+}
+
+.input-label {
+  @apply block text-sm font-medium text-accent mb-1;
+}
+
+.input-field {
+  @apply w-full p-2 bg-base-100 border border-base-200 rounded-md text-secondary placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent;
+}
+
+/* Custom styles for Button component */
+.btn {
+  @apply py-2 px-4 rounded-md font-medium transition-colors duration-200;
+}
+
+.btn-primary {
+  @apply bg-primary text-white hover:bg-opacity-90;
+}
+
+.btn-secondary {
+  @apply bg-secondary text-neutral hover:bg-opacity-90;
+}
+
+.btn-large {
+  @apply py-3 px-6 text-lg;
+}
+
+/* Custom styles for Box component */
+.box {
+  @apply bg-base-100 rounded-lg shadow-md p-6;
+}
+
+/* Custom styles for ErrorText component */
+.error-text {
+  @apply text-sm text-error mt-1;
+}
+
+/* Additional global styles */
+.container {
+  @apply max-w-6xl mx-auto px-4;
+}
+
+.section {
+  @apply py-12;
+}
+
+/* Responsive tweaks */
+@screen sm {
+  .container {
+    @apply px-6;
+  }
+}
+
+@screen lg {
+  .container {
+    @apply px-8;
+  }
+}
