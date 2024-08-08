@@ -15,20 +15,24 @@ export default function Login() {
     password: "",
   });
   const [error, setError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsLoading(true);
     try {
-      const response = await login(formData)
+      const response = await login(formData);
       if (response.data.isVerified) {
         toast.success("Logged in successfully");
-        navigate("/dashboard")
+        navigate("/dashboard");
       } else {
-        setError("Please verify your email")
+        setError("Please verify your email");
       }
-    } catch (error:any) {
+    } catch (error: any) {
       setError(error.response.data.error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -55,8 +59,13 @@ export default function Login() {
             }
           />
           {error && <ErrorText message={error} />}
-          <Button variant="primary" className="w-full mt-4">
-            Submit
+          <Button
+            variant="primary"
+            className="w-full mt-4"
+            type="submit"
+            disabled={isLoading}
+          >
+            {isLoading ? "Logged In..." : "Login"}
           </Button>
         </form>
         <div className="relative flex py-8 items-center">

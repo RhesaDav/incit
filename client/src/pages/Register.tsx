@@ -3,10 +3,10 @@ import { Box } from "../components/Box";
 import { Button } from "../components/Button";
 import { ErrorText } from "../components/ErrorText";
 import Input from "../components/Input";
-import axios from "axios";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { type Register } from "../types";
+import { register } from "../service/auth";
 
 const validatePassword = (password: string) => {
   const errors = [];
@@ -43,7 +43,7 @@ export default function Register() {
 
     setIsLoading(true);
     try {
-      await axios.post(`${import.meta.env.VITE_BASE_API}/auth/register`, { ...formData });
+      await register(formData)
       toast.success("Signed up successfully");
     } catch (error:any) {
       toast.error(error.response.data.message||"Error signing up");

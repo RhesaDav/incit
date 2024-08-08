@@ -27,7 +27,7 @@ app.use((0, cors_1.default)({
     optionsSuccessStatus: 200,
 }));
 app.get("/", (req, res) => {
-    return res.status(200).json("test");
+    return res.status(200).json(`test`);
 });
 app.use("/", oauth_route_1.default);
 app.use("/auth", auth_route_1.default);

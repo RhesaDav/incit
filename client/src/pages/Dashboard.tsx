@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { Box } from "../components/Box";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import Loading from "../components/Loading";
+import { getUsers } from "../service/user";
+import { getStatistic } from "../service/statistic";
+import Error500 from "../components/Error500";
 
 interface User {
   id: number;
@@ -23,6 +25,7 @@ export default function Dashboard() {
   const [users, setUsers] = useState<User[]>([]);
   const [statistics, setStatistics] = useState<Statistics | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     fetchDashboard();
@@ -31,24 +34,18 @@ export default function Dashboard() {
 
   const fetchDashboard = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BASE_API}/user`,
-        { withCredentials: true }
-      );
+      const response = await getUsers();
       setUsers(response.data);
       setIsLoading(false);
     } catch (error) {
-      toast.error("Error fetching dashboard data");
+      setIsError(true);
       setIsLoading(false);
     }
   };
 
   const fetchStatistics = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BASE_API}/statistic`,
-        { withCredentials: true }
-      );
+      const response = await getStatistic();
       setStatistics(response.data);
     } catch (error) {
       toast.error("Error fetching statistics");
@@ -56,9 +53,11 @@ export default function Dashboard() {
   };
 
   if (isLoading) {
-    return (
-      <Loading/>
-    );
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error500 />;
   }
 
   return (
@@ -138,7 +137,9 @@ export default function Dashboard() {
               >
                 <div className="font-semibold text-lg">{user.email}</div>
                 <div className="text-sm text-gray-600">
-                  <p>Sign Up Date: {new Date(user.createdAt).toLocaleString()}</p>
+                  <p>
+                    Sign Up Date: {new Date(user.createdAt).toLocaleString()}
+                  </p>
                   <p>Login Count: {user.loginCount}</p>
                   <p>
                     Last Logout:{" "}

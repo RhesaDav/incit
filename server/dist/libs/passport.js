@@ -19,7 +19,7 @@ const prismaClient_1 = __importDefault(require("../libs/prismaClient"));
 passport_1.default.use(new passport_google_oauth20_1.Strategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: "/auth/google/callback",
+    callbackURL: `${process.env.BASE_URL_SERVER}/auth/google/callback`,
 }, (accessToken, refreshToken, profile, done) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const email = profile.emails[0].value;
@@ -59,7 +59,7 @@ passport_1.default.use(new passport_google_oauth20_1.Strategy({
 passport_1.default.use(new passport_facebook_1.Strategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
-    callbackURL: "/auth/facebook/callback",
+    callbackURL: `${process.env.BASE_URL_SERVER}/auth/facebook/callback`,
     profileFields: ["id", "emails", "name"],
 }, (accessToken, refreshToken, profile, done) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b, _c;

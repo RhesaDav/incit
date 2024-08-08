@@ -27,7 +27,7 @@ app.use(
 );
 
 app.get("/", (req: Request, res:Response) => {
-  return res.status(200).json("test")
+  return res.status(200).json(`test`)
 })
 
 app.use("/",oauthRouter);

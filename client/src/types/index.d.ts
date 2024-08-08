@@ -9,3 +9,8 @@ export interface Register {
     password: string;
     confirmPassword: string;
 }
+
+export interface ResetPassword {
+    userId: string;
+    password: string;
+}

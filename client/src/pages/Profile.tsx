@@ -6,6 +6,8 @@ import { Button } from "../components/Button";
 import toast from "react-hot-toast";
 import { motion } from "framer-motion";
 import Loading from "../components/Loading";
+import { getProfile } from "../service/profile";
+import Error500 from "../components/Error500";
 
 type ProfileTypes = {
   username: string;
@@ -22,6 +24,7 @@ function Profile() {
     facebookId: "",
   });
   const [isLoading, setIsLoading] = useState(true);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     fetchProfile();
@@ -29,10 +32,7 @@ function Profile() {
 
   const fetchProfile = async () => {
     try {
-      const response = await axios.get(
-        `${import.meta.env.VITE_BASE_API}/profile`,
-        { withCredentials: true }
-      );
+      const response = await getProfile();
       setFormData({
         email: response.data.email,
         facebookId: response.data.facebookId,
@@ -41,7 +41,7 @@ function Profile() {
       });
       setIsLoading(false);
     } catch (error) {
-      toast.error("Error fetching profile");
+      setIsError(true);
       setIsLoading(false);
     }
   };
@@ -60,9 +60,11 @@ function Profile() {
   };
 
   if (isLoading) {
-    return (
-      <Loading/>
-    );
+    return <Loading />;
+  }
+
+  if (isError) {
+    return <Error500 />;
   }
 
   return (
@@ -94,7 +96,6 @@ function Profile() {
             placeholder="Name"
           />
           <Button
-            
             className="bg-primary text-white py-2 px-4 rounded hover:bg-primary-600 transition-colors"
             onClick={handleNameChange}
           >

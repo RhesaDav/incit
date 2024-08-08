@@ -3,8 +3,8 @@ import { Box } from "../components/Box";
 import { Button } from "../components/Button";
 import { ErrorText } from "../components/ErrorText";
 import Input from "../components/Input";
-import axios from "axios";
 import { useParams } from "react-router-dom";
+import { resetPassword } from "../service/auth";
 
 export default function ResetPassword() {
   const { id } = useParams<{ id: string }>();
@@ -23,10 +23,7 @@ export default function ResetPassword() {
       return;
     }
     try {
-      await axios.post(`${import.meta.env.VITE_BASE_API}/auth/reset-password`, {
-        userId: id,
-        password: formData.password,
-      });
+      await resetPassword({userId:id as string, password: formData.password});
       setSuccess("Password reset successfully");
       setError(null);
     } catch (error) {
@@ -34,6 +31,8 @@ export default function ResetPassword() {
       setSuccess(null);
     }
   };
+
+  if (!id) return <div>Id not found</div>
 
   return (
     <div className="mx-auto p-4 bg-base-50 min-h-screen">

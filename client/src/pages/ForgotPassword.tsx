@@ -3,7 +3,7 @@ import { Box } from "../components/Box";
 import { Button } from "../components/Button";
 import { ErrorText } from "../components/ErrorText";
 import Input from "../components/Input";
-import axios from "axios";
+import { forgotPassword } from "../service/auth";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState<string>("");
@@ -13,7 +13,7 @@ export default function ForgotPassword() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post(`${import.meta.env.VITE_BASE_API}/auth/forgot-password`, { email });
+      await forgotPassword(email);
       setSuccess("Password reset email sent. Please check your inbox.");
       setError(null);
     } catch (error) {
