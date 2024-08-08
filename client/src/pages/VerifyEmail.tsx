@@ -13,7 +13,7 @@ const VerifyEmail: React.FC = () => {
       const token = params.get('token');
 
       try {
-        await axios.get(`http://localhost:3100/auth/verify-email?token=${token}`);
+        await axios.get(`${import.meta.env.VITE_BASE_API}/auth/verify-email?token=${token}`);
         setMessage('Email verified successfully');
         setTimeout(() => {
           navigate('/login');
