@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../components/Input";
 import { Box } from "../components/Box";
 import { Button } from "../components/Button";
