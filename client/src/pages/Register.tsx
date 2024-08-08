@@ -122,14 +122,14 @@ export default function Register() {
         <form>
           <div className="flex flex-row gap-2 justify-center mb-4">
             <a
-              href={`${import.meta.env.VITE_BASE_API}}/auth/google`}
+              href={`${import.meta.env.VITE_BASE_API}/auth/google`}
               className="flex flex-row items-center gap-2 bg-base-150 p-2 rounded-md text-gray-200 cursor-pointer"
             >
               <FaGoogle size={24} />
               <span className="font-medium">Google</span>
             </a>
             <a
-              href={`${import.meta.env.VITE_BASE_API}}/auth/facebook`}
+              href={`${import.meta.env.VITE_BASE_API}/auth/facebook`}
               className="flex flex-row items-center gap-2 bg-base-150 p-2 rounded-md text-gray-200 cursor-pointer"
             >
               <FaFacebook size={24} />
