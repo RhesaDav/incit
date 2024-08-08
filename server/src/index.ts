@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import dotenv from "dotenv";
 import passport from "./libs/passport";
 import authRouter from "./routes/auth.route";
@@ -25,6 +25,10 @@ app.use(
     optionsSuccessStatus: 200,
   })
 );
+
+app.get("/", (req: Request, res:Response) => {
+  return res.status(200).json("test")
+})
 
 app.use("/",oauthRouter);
 app.use("/auth",authRouter);
